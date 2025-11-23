@@ -2,7 +2,8 @@
 
 PRESETS=('archiso')
 
-ALL_kver='/boot/vmlinuz-linux-cachyos-lts'
-archiso_config='/etc/mkinitcpio.conf.d/archiso.conf'
+ALL_kver='/boot/vmlinuz-linux-cachyos'
 
-archiso_image="/boot/initramfs-linux-cachyos-lts.img"
+archiso_config='/etc/mkinitcpio.conf.d/archiso-encrypted.conf'
+
+archiso_image="/boot/initramfs-linux-cachyos.img"

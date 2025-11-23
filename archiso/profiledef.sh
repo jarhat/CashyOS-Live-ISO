@@ -1,21 +1,38 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="cachyos"
+iso_name="cashyos"
 iso_label="COS_$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y%m)"
 iso_publisher="CachyOS <https://cachyos.org>"
 iso_application="CachyOS Live/Rescue DVD"
 iso_version="$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y.%m.%d)"
 install_dir="arch"
 buildmodes=('iso')
-## GRUB
-bootmodes=('bios.syslinux' 'uefi.grub')
-## systemd-boot
-#bootmodes=('bios.syslinux' 'uefi.systemd-boot')
+bootmodes=('bios.syslinux.mbr'
+           'bios.syslinux.eltorito'
+           'uefi-ia32.grub.eltorito'
+           'uefi-ia32.grub.esp'
+           'uefi-x64.grub.eltorito'
+           'uefi-x64.grub.esp'
+           'uefi-x64.refind.eltorito'
+           'uefi-x64.refind.esp'
+           'uefi-ia32.systemd-boot.eltorito'
+           'uefi-ia32.systemd-boot.esp'
+           'uefi-x64.systemd-boot.esp'
+           'uefi-x64.systemd-boot.eltorito'
+           )
+ia32_uefi_default_bootloader="uefi-ia32.systemd-boot.esp"
+x64_uefi_default_bootloader="uefi-x64.systemd-boot.esp"
 arch="x86_64"
 pacman_conf="pacman.conf"
+pacman_testing_conf="pacman-testing.conf"
+#airootfs_image_type="squashfs"
+#airootfs_image_tool_options=('-comp' 'xz' '-Xbcj' 'x86' '-b' '1M' '-Xdict-size' '1M')
 airootfs_image_type="squashfs"
-airootfs_image_tool_options=('-comp' 'xz' '-Xbcj' 'x86' '-b' '1M' '-Xdict-size' '1M')
+airootfs_image_tool_options=('-comp' 'zstd')
+bootstrap_tarball_compression=('zstd' '-c' '-T0' '--auto-threads=logical')
+#airootfs_image_type="erofs"
+#airootfs_image_tool_options=('-zlzma,109' -E 'ztailpacking,fragments,dedupe')
 file_permissions=(
   ["/etc/shadow"]="0:0:400"
   ["/etc/gshadow"]="0:0:400"

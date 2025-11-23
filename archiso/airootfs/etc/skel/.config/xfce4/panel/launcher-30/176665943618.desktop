@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Exec=thunar
+Icon=/usr/local/share/aoc/ember.png
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Utility;X-XFCE;
+Name=Advent Of Cash
+Comment=
+Keywords=program;applications;bookmarks;
+X-XFCE-Source=file:///usr/share/applications/xfce4-appfinder.desktop
+Path=Public

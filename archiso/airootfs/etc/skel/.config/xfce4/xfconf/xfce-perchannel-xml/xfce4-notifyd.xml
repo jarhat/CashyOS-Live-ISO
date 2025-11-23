@@ -1,0 +1,20 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<channel name="xfce4-notifyd" version="1.0">
+  <property name="log-max-size-enabled" type="bool" value="true"/>
+  <property name="applications" type="empty">
+    <property name="known_applications" type="array">
+      <value type="string" value="electron-cash"/>
+      <value type="string" value="notify-send"/>
+      <value type="string" value="org.telegram.desktop"/>
+      <value type="string" value="Xfce volume control"/>
+    </property>
+  </property>
+  <property name="date-time-custom-format" type="string" value="%a %H:%M:%S"/>
+  <property name="min-width-enabled" type="bool" value="false"/>
+  <property name="min-width" type="uint" value="150"/>
+  <property name="do-not-disturb" type="bool" value="false"/>
+  <property name="notify-location" type="string" value="top-left"/>
+  <property name="initial-opacity" type="double" value="0.40999999999999998"/>
+  <property name="theme" type="string" value="Default"/>
+</channel>

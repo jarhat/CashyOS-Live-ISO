@@ -1,0 +1,17 @@
+{
+    "auto_connect": true,
+    "config_version": 2,
+    "console-history": [],
+    "enable_opreturn": false,
+    "gui_last_wallet": "/home/liveuser/.electron-cash/wallets/default_wallet",
+    "is_maximized": false,
+    "qt_enable_highdpi": true,
+    "recently_open": [
+        "/home/liveuser/.electron-cash/wallets/default_wallet"
+    ],
+    "rpcpassword": "NkpATkakjNVXi04idcSKNA==",
+    "rpcuser": "user",
+    "tor_socks_port": 0,
+    "use_fusion": true,
+    "use_virtualkeyboard": true
+}

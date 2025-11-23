@@ -10,8 +10,6 @@ buildiso is used to build CachyOS ISO.
 $ ./buildiso.sh -h
 Usage: buildiso [options]
     -c                 Disable clean work dir
-    -r                 Disable building in RAM on systems with more than 23GB RAM
-    -w                 Remove build directory (not the ISO) after ISO file is built
     -h                 This help
     -p <profile>       Buildset or profile [default: desktop]
     -v                 Verbose output to log file, show profile detail (-q)
@@ -36,7 +34,7 @@ cd cachyos-archiso
 
 ### Build
 ```bash
-sudo ./buildiso.sh -p desktop -v -w
+sudo ./buildiso.sh -p desktop -v
 ```
 
 As the result iso appears at the `out` folder

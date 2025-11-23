@@ -1,0 +1,104 @@
+#!/bin/bash
+## -  #  -  #  -  #  -  #  -  #  -  #
+## -  -  -   Description   -  -  -  #
+## this is a basic script to work with file highlight colors in thunar. 
+## It can display, set and clear foregrand or background colors set with gvfs.
+## You need to look through the script before running it.
+## Written by soas 2024
+## https://codeberg.org/soas/filehighl
+## -  #  -  #  -  #  -  #  -  #  -  #
+
+## Underline key information in output
+## Can comment out if desired
+u=$(tput smul)		## on
+uo=$(tput rmul)		## off
+
+assignColors() {
+## Some colors I like
+## You can comment out the ones you don't use to avoid making useless variables.
+## Format is either rgb or rgba.
+##
+## Background Colors
+## Set at 50% opacity
+## Change the 4th value from 0.5 to 1 if you want opaque
+bgOrange="rgba(214,121,58,0.5)"		## hex: #d6793a
+bgRed="rgba(196,47,55,0.5)"			## hex: #c42f37
+bgPurple="rgba(144,95,123,0.5)"		## hex: #905f7b
+bgBlueDk="rgba(0,87,138,0.5)"		## hex: #00578a
+bgBlueLt="rgba(34,188,200,0.5)"		## hex: #22bcc8
+bgBlue="$BlueLt"
+bgGreen="rgba(39,197,137,0.5)"		## hex: #27c589
+bgGold="rgba(233,206,51,0.5)"		## hex: #e9ce33
+bgWhite="rgba(228,230,191,0.5)"		## hex: #e4e6bf
+bgGrey="rgba(143,139,124,0.5)"		## hex: #8f8b7c
+bgGray="$bgGrey"
+bgBlack="rgba(17,22,27,0.5)"		## hex: #11161b
+bgClear="-d"						## delete any existing information; do not set
+##
+## Foreground Colors
+fgOrange="rgba(214,121,58,1)"		## hex: #d6793a
+fgRed="rgba(196,47,55,1)"			## hex: #c42f37
+fgRed1="rgba(154,62,56,1)"			## hex: #9a3e38
+fgPurple="rgba(144,95,123,1)"		## hex: #905f7b
+fgBlueDk="rgba(0,87,138,1)"			## hex: #00578a
+fgBlueLt="rgba(34,188,200,1)"		## hex: #22bcc8
+fgBlue="$BlueLt"
+fgGreen="rgba(39,197,137,1)"		## hex: #27c589
+fgGold="rgba(233,206,51,1)"			## hex: #e9ce33
+fgWhite="rgba(228,230,191,1)"		## hex: #e4e6bf
+fgGrey="rgba(143,139,124,1)"		## hex: #8f8b7c
+fgGray="$fgGrey"
+fgBlack="rgba(17,22,27,1)"			## hex: #11161b
+fgClear="-d"						## delete any existing information; do not set
+Clear="$fgClear"
+}
+assignColors ## Comment out calling the function if not using
+
+## Obtain the filename from argument passed
+file="$1"
+
+## This does a basic check to make sure the user provides a filename that exists
+fileExists() {
+if [ -z "$file" ] ; then
+  echo "Must pass a filename as an argument. Exiting."
+  exit
+else
+		echo -n "Filename ${u}$file${uo} was provided. " 
+	if [ -e "$file" ] ; then
+		echo "This file exists." 
+	else
+		echo "This file ${u}$file${uo} does not exist. Exiting."; exit
+	fi
+fi
+}
+fileExists ## Comment out this line to skip checking for file
+
+## Print the filename being used:
+# echo -n "file is ${u}$file${uo}"
+
+## Set the color(s) you wish to apply
+## Variables are set in the function assignColors
+## Or you can specify arbitrarily here
+setAsBg="rgba(10,193,142,1)"		## set background
+setAsFg="rgba(255,255,255,1)"		## set foreground
+# setAsBg="$Clear"		## remove existing background
+
+## Display existing highligh information
+## Not really needed for basic use
+printHighlight() {
+	echo -e "display any existing ${u}gio info${uo} with ${u}metadata::thunar-highlight-color-${uo} for the file ${u}$file${uo}:"
+	gio info "$file" | grep --color=always "metadata::thunar-highlight-color-\w\w\w\wground"
+}
+printHighlight ## Comment to skip printing the file's highlighting information before changes are made
+
+setBg() {
+	gio set -t 'string' "$file" 'metadata::thunar-highlight-color-background' $setAsBg
+}
+setBg ## Comment this out if you don't want to set the Background color
+
+setFg() {
+	gio set -t 'string' "$file" 'metadata::thunar-highlight-color-foreground' $setAsFg
+}
+setFg ## Comment this out if you don't want to set the Foreground color
+
+printHighlight ## Comment to skip printing the file's highlighting information after changes are made

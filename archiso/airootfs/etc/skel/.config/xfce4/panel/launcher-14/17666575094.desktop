@@ -1,0 +1,18 @@
+[Desktop Entry]
+Comment=Lightweight Bitcoin Cash Client
+Exec=electron-cash %u
+GenericName=Bitcoin Cash Wallet
+Icon=electron-cash
+Name=Electron Cash
+Categories=Finance;Network;
+StartupNotify=true
+StartupWMClass=electron-cash
+Terminal=false
+Type=Application
+MimeType=x-scheme-handler/bitcoincash;x-scheme-handler/cashacct;
+Actions=Testnet;
+X-XFCE-Source=file:///usr/share/applications/electron-cash.desktop
+
+[Desktop Action Testnet]
+Exec=electron-cash --testnet %u
+Name=Testnet mode
